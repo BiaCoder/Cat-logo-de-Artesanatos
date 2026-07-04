@@ -1,0 +1,238 @@
+:root {
+    --primary: #6366f1;
+    --primary-hover: #4f46e5;
+    --success: #059669;
+    --equipe: #0284c7;
+    --bg-app: #f8fafc;
+    --bg-card: #ffffff;
+    --text: #1e293b;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background: var(--bg-app); color: var(--text); padding: 20px; min-height: 100vh; }
+
+.app-container { display: grid; grid-template-columns: 420px 1fr; gap: 24px; max-width: 1600px; margin: 0 auto; }
+
+/* ABAS */
+.painel-controle { background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border); padding: 20px; height: fit-content; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05); }
+.abas-navegacao { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 5px; background: #f1f5f9; padding: 4px; border-radius: 8px; margin-bottom: 20px; }
+.tab-btn { background: transparent; border: none; padding: 10px; font-size: 0.85rem; font-weight: 600; color: var(--text-muted); cursor: pointer; border-radius: 6px; transition: all 0.2s; }
+.tab-btn.ativa { background: var(--bg-card); color: var(--text); box-shadow: 0 1px 3px rgb(0 0 0 / 0.1); }
+.conteudo-tab { display: none; }
+.conteudo-tab.ativa { display: block; }
+
+/* COMPONENTES DE FORMULÁRIO ALINHADOS */
+h3 { font-size: 1.2rem; margin-bottom: 4px; color: #0f172a; }
+.ajuda-texto { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 16px; }
+.form-grupo { display: flex; flex-direction: column; margin-bottom: 12px; }
+.form-grupo label { font-size: 0.8rem; font-weight: 600; color: #475569; margin-bottom: 4px; }
+.form-grupo input, .form-grupo select { padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 0.9rem; outline: none; background: #fdfdfd; transition: border 0.2s; }
+.form-grupo input:focus, .form-grupo select:focus { border-color: var(--primary); }
+.form-linha { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+/* BOTÕES */
+.btn-acao { width: 100%; padding: 12px; border: none; border-radius: 8px; font-weight: 600; color: white; cursor: pointer; margin-top: 8px; transition: background 0.2s; font-size: 0.9rem; }
+.btn-acao.primario { background: var(--primary); }
+.btn-acao.primario:hover { background: var(--primary-hover); }
+.btn-acao.equipe { background: var(--equipe); }
+.btn-acao.sucesso { background: var(--success); }
+
+/* LISTAS INTERNAS E DASHBOARD */
+.lista-registros, .dashboard-eficiencia { margin-top: 20px; border-top: 1px solid var(--border); padding-top: 16px; }
+h4 { font-size: 0.9rem; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); }
+.lista-registros ul, .ranking-box ul { list-style: none; }
+.lista-registros li, .ranking-box li { display: flex; justify-content: space-between; background: #f8fafc; padding: 8px 12px; border-radius: 6px; font-size: 0.85rem; margin-bottom: 6px; border-left: 3px solid var(--primary); }
+.dash-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.dash-card { background: #f0f9ff; border: 1px solid #e0f2fe; padding: 10px; border-radius: 8px; font-size: 0.8rem; color: #0369a1; font-weight: 600; }
+.dash-card span { display: block; font-size: 1.1rem; color: #0c4a6e; }
+.ranking-box h5 { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 6px; }
+.ranking-box li { border-left-color: var(--equipe); }
+
+/* ENGENHARIA DE PREÇO PREVIEW */
+.bloco-calculo-industrial { background: #fafafa; border: 1px solid var(--border); padding: 14px; border-radius: 10px; margin-top: 10px; }
+.painel-preview-preco { background: #f0fdf4; border: 1px solid #bbf7d0; padding: 12px; border-radius: 8px; margin-top: 12px; color: #166534; }
+.preview-linha { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 4px; }
+.preview-preco-final { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #bbf7d0; padding-top: 6px; margin-top: 6px; font-size: 0.9rem; font-weight: 600; }
+.preview-preco-final strong { font-size: 1.2rem; }
+
+/* VITRINE COMERCIAL (DIREITA) */
+.painel-vitrine { background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border); padding: 24px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05); }
+.vitrine-topo { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+.filtros-container { display: flex; gap: 8px; }
+.btn-filtro { background: #f1f5f9; border: none; padding: 8px 16px; font-size: 0.85rem; font-weight: 600; border-radius: 20px; cursor: pointer; color: var(--text-muted); transition: all 0.2s; }
+.btn-filtro.ativo { background: #ec4899; color: white; }
+
+/* CARDS DA VITRINE */
+.produtos-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+.card-produto { background: var(--bg-card); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; position: relative; transition: transform 0.2s; }
+.card-produto:hover { transform: translateY(-4px); box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); }
+.btn-deletar-prod { position: absolute; top: 10px; right: 10px; background: rgba(255,255,255,0.9); border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; z-index: 10; box-shadow: 0 2px 4px rgb(0 0 0 / 0.1); }
+.img-container { height: 180px; background: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 3rem; color: var(--text-muted); }
+.img-container img { width: 100%; height: 100%; object-fit: cover; }
+.card-conteudo { padding: 16px; }
+.tag-categoria { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; color: #ec4899; background: #fce7f3; padding: 2px 8px; border-radius: 4px; display: inline-block; margin-bottom: 8px; }
+.card-conteudo h4 { font-size: 1.05rem; color: #0f172a; margin-bottom: 10px; text-transform: none; }
+.detalhes-valores { font-size: 0.75rem; color: var(--text-muted); background: #f8fafc; padding: 8px; border-radius: 6px; margin-bottom: 12px; display: flex; flex-direction: column; gap: 3px; }
+.preco-final-box { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 10px; }
+.preco-final-box span { font-size: 0.8rem; color: var(--text-muted); }
+.preco-final-box strong { font-size: 1.2rem; color: #db2777; }
+.btn-loja { display: block; text-align: center; background: #f1f5f9; color: var(--text); padding: 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; text-decoration: none; margin-top: 10px; border: 1px solid var(--border); }
+.btn-loja:hover { background: #e2e8f0; }
+
+/* 📅 ESTILOS DO SELETOR MENSAL E BOTÕES DE AJUSTE */
+.filtro-mensal-global {
+    background: #edf2f7;
+    border: 1px solid #cbd5e1;
+    padding: 12px;
+    border-radius: 10px;
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+.filtro-mensal-global label {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #334155;
+}
+.filtro-mensal-global select {
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    font-weight: 600;
+    background-color: #fff;
+    color: #1e293b;
+}
+.botoes-ajuste {
+    display: flex;
+    gap: 6px;
+}
+.btn-ajustar {
+    background: #e2e8f0;
+    border: none;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-weight: 600;
+    color: #475569;
+}
+.btn-ajustar:hover {
+    background: #cbd5e1;
+}
+.lista-registros li, .ranking-box li {
+    flex-direction: column;
+    gap: 4px;
+}
+.registro-linha-superior {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* 📊 PAINEL DO FECHAMENTO EXCLUSIVO */
+.dash-grid-financeiro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+.dash-card-fin {
+    background: #f8fafc;
+    border: 1px solid #cbd5e1;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    color: #475569;
+}
+.dash-card-fin strong {
+    display: block;
+    font-size: 1.1rem;
+    color: #1e293b;
+    margin-top: 4px;
+}
+.lucro-destaque {
+    background: #f0fdf4;
+    border-color: #bbf7d0;
+    color: #166534;
+}
+.lucro-destaque strong {
+    color: #15803d;
+}
+.btn-acao.zap {
+    background: #22c55e;
+}
+.btn-acao.zap:hover {
+    background: #16a34a;
+}
+.badge-alerta {
+    font-size: 0.75rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.badge-alerta.ok { background: #dcfce7; color: #15803d; }
+.badge-alerta.aviso { background: #fef9c3; color: #a16207; }
+.badge-alerta.esgotado { background: #fee2e2; color: #b91c1c; }
+
+/* 📊 ESTILOS DA NOVA ABA DE BALANÇO */
+.dashboard-financeiro-total {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 15px;
+}
+.dash-card-completo {
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    background: #f8fafc;
+}
+.dash-card-completo h5 {
+    margin: 0 0 5px 0;
+    font-size: 0.8rem;
+    color: #64748b;
+}
+.dash-card-completo strong {
+    font-size: 1.2rem;
+    color: #0f172a;
+}
+.dash-card-completo.lucro-real-box {
+    grid-column: 1 / -1;
+    background: #ecfdf5;
+    border-color: #a7f3d0;
+}
+.dash-card-completo.lucro-real-box strong {
+    color: #047857;
+    font-size: 1.5rem;
+}
+.card-produto .estoque-info {
+    font-size: 0.85rem;
+    background: #f1f5f9;
+    padding: 6px;
+    border-radius: 4px;
+    margin: 8px 0;
+    color: #334155;
+}
+.btn-venda-acao {
+    width: 100%;
+    padding: 8px;
+    background: #0284c7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: 0.2s;
+}
+.btn-venda-acao:hover {
+    background: #0369a1;
+}
+.btn-venda-acao:disabled {
+    background: #cbd5e1;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
