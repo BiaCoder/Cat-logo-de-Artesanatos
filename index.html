@@ -3,232 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ateliê Pro - Gestão Mensal e Anual</title>
+    <title>Ateliê Pro - Catálogo de Artesanatos</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <div class="app-container">
-        
-        <!-- 🎛️ PAINEL ESQUERDO: CONTROLE CENTRAL EM ABAS -->
-        <aside class="painel-controle">
-            <div class="filtro-mensal-global">
-                <label for="filtro-mes-global">📅 Mês de Trabalho Ativo:</label>
-                <select id="filtro-mes-global">
-                    <option value="Janeiro">Janeiro</option>
-                    <option value="Fevereiro">Fevereiro</option>
-                    <option value="Março">Março</option>
-                    <option value="Abril">Abril</option>
-                    <option value="Maio">Maio</option>
-                    <option value="Junho">Junho</option>
-                    <option value="Julho" selected>Julho</option>
-                    <option value="Agosto">Agosto</option>
-                    <option value="Setembro">Setembro</option>
-                    <option value="Outubro">Outubro</option>
-                    <option value="Novembro">Novembro</option>
-                    <option value="Dezembro">Dezembro</option>
-                </select>
+  <div class="app-container">
+    
+    <!-- Coloque o seu Menu Lateral aqui dentro de uma tag <aside class="sidebar"> -->
+    <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>✨ Ateliê Pro</h2>
+                <p>Catálogo & Gestão</p>
             </div>
-
-            <div class="abas-navegacao">
-                <button class="tab-btn ativa" data-tab="tab-lotes">📦 Lotes</button>
-                <button class="tab-btn" data-tab="tab-equipe">🧵 Linha de Frente</button>
-                <button class="tab-btn" data-tab="tab-produtos">🛍️ Produtos</button>
-                <button class="tab-btn" data-tab="tab-consolidado" style="background: #f1f5f9; color: #0f172a; font-weight: bold;">📊 Consolidado Geral</button>
-            </div>
-
-            <!-- ABA 1: LOTES -->
-            <div id="tab-lotes" class="conteudo-tab ativa">
-                <h3>📦 Entrada de Insumos & Lotes</h3>
-                <input type="hidden" id="lote-id-edicao">
-                
-                <div class="form-grupo">
-                    <label>Identificação do Lote</label>
-                    <input type="text" id="lote-nome" placeholder="Ex: MERCADO LIVRE: 4 fios nauticos">
-                </div>
-                <div class="form-linha">
-                    <div class="form-grupo">
-                        <label>Custo Total (R$)</label>
-                        <input type="number" id="lote-valor" placeholder="Ex: 143.00" step="0.01">
-                    </div>
-                    <div class="form-grupo">
-                        <label>Margem Perda (%)</label>
-                        <input type="number" id="lote-perda" placeholder="Ex: 5">
-                    </div>
-                </div>
-                <button id="btn-salvar-lote" class="btn-acao primario">Registrar Compra de Lote</button>
-
-                <div class="lista-registros">
-                    <h4>Lotes Disponíveis e Saldo de Linha</h4>
-                    <ul id="lista-lotes-cadastrados"></ul>
-                </div>
-            </div>
-
-            <!-- ABA 2: LINHA DE FRENTE -->
-            <div id="tab-equipe" class="conteudo-tab">
-                <h3>🧵 Controle da Linha de Frente</h3>
-                <input type="hidden" id="func-id-edicao">
-                
-                <div class="form-grupo">
-                    <label>Nome do Artesão(ã)</label>
-                    <input type="text" id="func-nome" placeholder="Ex: Mãe">
-                </div>
-                <div class="form-linha">
-                    <div class="form-grupo">
-                        <label>Peças Produzidas</label>
-                        <input type="number" id="func-pecas" placeholder="Ex: 10" min="1">
-                    </div>
-                    <div class="form-grupo">
-                        <label>Valor por Bolsa (R$)</label>
-                        <input type="number" id="func-pago-por-peca" placeholder="Ex: 25.00" step="0.01">
-                    </div>
-                </div>
-                <button id="btn-salvar-func" class="btn-acao equipe">Registrar Produção</button>
-
-                <div class="dashboard-eficiencia">
-                    <h4>📊 Painel Resumido do Mês</h4>
-                    <div class="dash-grid-financeiro">
-                        <div class="dash-card-fin">Mão de Obra Devida: <strong id="dash-total-pago">R$ 0,00</strong></div>
-                        <div class="dash-card-fin">Total Peças Feitas: <strong id="dash-total-pecas">0</strong></div>
-                    </div>
-                    <button id="btn-exportar-zap" class="btn-acao zap">📱 Enviar Fechamento via WhatsApp</button>
-                    <ul id="lista-ranking-produtividade" style="margin-top:10px;"></ul>
-                </div>
-            </div>
-
-            <!-- ABA 3: CRIAÇÃO DE PRODUTOS (COM QUANTIDADE E COR) -->
-            <div id="tab-produtos" class="conteudo-tab">
-                <h3>🛍️ Engenharia do Produto Final</h3>
-                
-                <div class="form-grupo">
-                    <label>Nome Comercial do Produto</label>
-                    <input type="text" id="prod-nome" placeholder="Ex: Bolsa Porta Celular Crochê">
-                </div>
-                
-                <div class="form-linha">
-                    <div class="form-grupo">
-                        <label>Quantidade produzida em Estoque</label>
-                        <input type="number" id="prod-qtd" placeholder="Ex: 4" min="1" value="1">
-                    </div>
-                    <div class="form-grupo">
-                        <label>Cores / Variações</label>
-                        <input type="text" id="prod-cor" placeholder="Ex: Rami, Azul-marinho, Preto">
-                    </div>
-                </div>
-
-                <div class="form-linha">
-                    <div class="form-grupo">
-                        <label>Categoria</label>
-                        <select id="prod-categoria">
-                            <option value="Bolsas">👜 Bolsas</option>
-                            <option value="Acessórios">✨ Acessórios</option>
-                        </select>
-                    </div>
-                    <div class="form-grupo">
-                        <label>Link da sua Loja (Opcional)</label>
-                        <input type="text" id="prod-loja" placeholder="https://mercadolivre.com...">
-                    </div>
-                </div>
-
-                <div class="bloco-calculo-industrial">
-                    <h4>📐 Rateio de Insumo por Consumo Unitário</h4>
-                    <div class="form-linha">
-                        <div class="form-grupo">
-                            <label>Selecionar Origem</label>
-                            <select id="prod-lote-selecionado" style="width:100%; display:block; padding:8px; border:1px solid #cbd5e1; border-radius:6px;"></select>
-                        </div>
-                        <div class="form-grupo">
-                            <label>Uso do Lote por Bolsa (%)</label>
-                            <input type="number" id="prod-lote-porcentagem" placeholder="Ex: 25" min="1" max="100" value="25">
-                        </div>
-                    </div>
-
-                    <h4>⏳ Mão de Obra Vinculada</h4>
-                    <div class="form-linha">
-                        <div class="form-grupo">
-                            <label>Quem Confeccionou?</label>
-                            <select id="prod-func-selecionado" style="width:100%; display:block; padding:8px; border:1px solid #cbd5e1; border-radius:6px;"></select>
-                        </div>
-                        <div class="form-grupo">
-                            <label>Lucro Adicional Ateliê (%)</label>
-                            <input type="number" id="prod-lucro-empresa" placeholder="Ex: 30" value="30">
-                        </div>
-                    </div>
-
-                    <div class="painel-preview-preco">
-                        <div class="preview-linha">Matéria-Prima (Unitária): <span id="view-custo-mat">R$ 0,00</span></div>
-                        <div class="preview-linha">Mão de Obra (Unitária): <span id="view-custo-mo">R$ 0,00</span></div>
-                        <div class="preview-preco-final">Preço Unitário Sugerido: <strong id="view-preco-final">R$ 0,00</strong></div>
-                    </div>
-                </div>
-
-                <button id="btn-salvar-produto" class="btn-acao sucesso">Adicionar Produtos ao Estoque</button>
-            </div>
-
-            <!-- NOVA ABA 4: CONSOLIDADO GERAL -->
-            <div id="tab-consolidado" class="conteudo-tab">
-                <h3>📊 Balanço Consolidado do Ateliê</h3>
-                
-                <div class="dashboard-financeiro-total">
-                    <div class="dash-card-completo faturamento">
-                        <h5>Faturamento Real (Vendas)</h5>
-                        <strong id="total-faturamento-real">R$ 0,00</strong>
-                    </div>
-                    <div class="dash-card-completo despesas">
-                        <h5>Custo Total de Insumos Comprados</h5>
-                        <strong id="total-custo-insumos">R$ 0,00</strong>
-                    </div>
-                    <div class="dash-card-completo mao-obra">
-                        <h5>Total de Mão de Obra Pago</h5>
-                        <strong id="total-custo-mo-geral">R$ 0,00</strong>
-                    </div>
-                    <div class="dash-card-completo lucro-real-box">
-                        <h5>Lucro Líquido do Mês Líquido</h5>
-                        <strong id="total-lucro-liquido-mes">R$ 0,00</strong>
-                    </div>
-                </div>
-
-                <div class="historico-anual-container" style="margin-top: 20px; padding: 15px; background: #fff; border-radius: 8px; border: 1px solid #e2e8f0;">
-                    <h4>📈 Resumo Acumulado de Lucros do Ano (2026)</h4>
-                    <div style="font-size: 1.4rem; color: #0f172a; font-weight: bold; margin: 10px 0;" id="lucro-acumulado-ano">R$ 0,00</div>
-                    <p style="font-size: 0.8rem; color: #64748b;">Soma de todos os meses com vendas confirmadas.</p>
-                </div>
-            </div>
-        </aside>
-
-        <!-- 🛍========= VITRINE COMERCIAL =========🛍 -->
-        <main class="painel-vitrine">
-            <header class="vitrine-topo">
-                <h2>💖 Minha Vitrine & Controle de Vendas</h2>
-                <div class="filtros-container">
-                    <button class="btn-filtro ativo" data-categoria="Todos">Todos</button>
-                    <button class="btn-filtro" data-categoria="Bolsas">Bolsas</button>
-                    <button class="btn-filtro" data-categoria="Acessórios">Acessórios</button>
-                </div>
-            </header>
-
-            <section class="produtos-grid" id="produtos-exibicao"></section>
-        </main>
-
+            
+            <nav class="sidebar-menu">
+                <!-- Resto do seu menu e das suas telas continuam normalmente para baixo... -->
+        <div class="menu-section">
+    <!-- Clicar no título agora abre/fecha o menu abaixo -->
+    
+    <div id="sub-vitrine" style="display: block;">
+        <button class="menu-item active" id="btn-nav-vitrine" onclick="navegarPara('tela-vitrine')">🏪 Produtos</button>
     </div>
-
-    <div class="card-consolidado" style="margin-top: 20px; background: #ffffff; padding: 15px; border-radius: 8px; border: 1px solid #e2e8f0;">
-    <h3 style="margin-top: 0; color: #1e293b; font-size: 1.1rem;">📋 Histórico de Vendas Confimadas (Mês Ativo)</h3>
-    <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
-        <thead>
-            <tr style="border-bottom: 2px solid #cbd5e1; color: #475569;">
-                <th style="padding: 6px;">Data</th>
-                <th style="padding: 6px;">Produto</th>
-                <th style="padding: 6px;">Qtd</th>
-                <th style="padding: 6px;">Total</th>
-                <th style="padding: 6px;">Ações</th>
-            </tr>
-        </thead>
-        <tbody id="tabela-historico-vendas">
-            </tbody>
-    </table>
 </div>
 
-    <script src="script.js"></script>
+<!-- Botões de Gestão e Painel diretamente expostos -->
+    <div class="menu-section">
+        
+        <button class="menu-item" onclick="navegarPara('tela-lotes')">🧵 Estoque de Lotes</button>
+        <button class="menu-item" onclick="navegarPara('tela-equipe')">👥 Linha de Frente</button>
+        <button class="menu-item" onclick="navegarPara('tela-engenharia')">⚙️ Engenharia de Produto</button>
+        <button class="menu-item" onclick="navegarPara('tela-consolidado')">📈 Consolidado Geral</button>
+    </div>
+</nav>
+
+<div class="sidebar-footer">
+    <div id="wrapper-mes-global" style="margin-bottom: 15px; padding: 0 10px;">
+        <label for="filtro-mes-global" style="font-size: 0.75rem; color: #94a3b8; display: block; margin-bottom: 4px;">Mês Ativo:</label>
+        <select id="filtro-mes-global" style="width: 100%; padding: 6px; border-radius: 6px; background: #1e293b; color: white; border: 1px solid #334155;">
+            <option value="Janeiro">Janeiro</option>
+            <option value="Fevereiro">Fevereiro</option>
+            <option value="Março">Março</option>
+            <option value="Abril">Abril</option>
+            <option value="Maio">Maio</option>
+            <option value="Junho">Junho</option>
+            <option value="Julho" selected>Julho</option>
+            <option value="Agosto">Agosto</option>
+            <option value="Setembro">Setembro</option>
+            <option value="Outubro">Outubro</option>
+            <option value="Novembro">Novembro</option>
+            <option value="Dezembro">Dezembro</option>
+        </select>
+    </div>
+</div>  
+</aside> <!-- FECHA A SIDEBAR COMPLETAMENTE AQUI -->
+
+<!-- O CONTEÚDO PRINCIPAL DEVE COMEÇAR LOGO APÓS O FECHAMENTO DA ASIDE -->
+<main class="conteudo-principal">
+    <!-- Suas telas de gestão e seções continuam aqui... -->
+            
+            <section id="tela-vitrine" class="tela-painel ativa">
+                <div class="vitrine-header">
+                    <div class="titulo-vitrine">
+                        <h1>Minha Vitrine & Catálogo</h1>
+                        <p>Explore nossas criações exclusivas feitas à mão</p>
+                    </div>
+                    <div class="vitrine-filtros-abas">
+                        <button class="btn-filtro-cat ativa" onclick="filtrarProdutosVitrine('Todos')">✨ Todos</button>
+                        <button class="btn-filtro-cat" onclick="filtrarProdutosVitrine('Bolsas')">👜 Bolsas</button>
+                        <button class="btn-filtro-cat" onclick="filtrarProdutosVitrine('Acessórios')">🧣 Acessórios</button>
+                        <button class="btn-filtro-cat" onclick="filtrarProdutosVitrine('Máscaras')">🎭 Máscaras</button>
+                    </div>
+                </div>
+
+                <div id="produtos-exibicao" class="produtos-grid">
+                    </div>
+            </section>
+
+            <section id="tela-lotes" class="tela-painel">
+                <div class="painel-header">
+                    <h2>🧵 Entrada de Insumos & Controle de Lotes</h2>
+                </div>
+                <div class="grid-inputs-dois">
+                    <div class="card-formulario">
+                        <h3>Cadastrar / Editar Lote</h3>
+                        <input type="hidden" id="lote-id-edicao">
+                        <div class="input-grupo">
+                            <label>Identificação do Lote (Ex: Rolo Fio Náutico Linha A):</label>
+                            <input type="text" id="lote-nome" placeholder="Ex: Rolo 500m Fio Náutico">
+                        </div>
+                        <div class="grid-dois-campos">
+                            <div class="input-grupo">
+                                <label>Custo Total (R$):</label>
+                                <input type="number" id="lote-valor" placeholder="143.00">
+                            </div>
+                            <div class="input-grupo">
+                                <label>Metragem Total (Metros):</label>
+                                <input type="number" id="lote-metros" placeholder="500">
+                            </div>
+                        </div>
+                        <div class="input-grupo">
+                            <label>Margem de Perda Estimada (%):</label>
+                            <input type="number" id="lote-perda" value="5">
+                        </div>
+                        <button id="btn-salvar-lote" class="btn-acao-painel">Registrar Compra de Lote</button>
+                    </div>
+                    <div class="card-formulario">
+                        <h3>Lotes Disponíveis e Saldo de Linha</h3>
+                        <ul id="lista-lotes-cadastrados" class="lista-customizada"></ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tela-equipe" class="tela-painel">
+                <div class="painel-header">
+                    <h2>👥 Linha de Frente (Controle da Equipe)</h2>
+                </div>
+                <div class="grid-inputs-dois">
+                    <div class="card-formulario">
+                        <h3>Registrar Produção do Colaborador</h3>
+                        <input type="hidden" id="func-id-edicao">
+                        <div class="input-grupo">
+                            <label>Nome do Funcionário/Artesã:</label>
+                            <input type="text" id="func-nome" placeholder="Ex: Maria Souza">
+                        </div>
+                        <div class="grid-dois-campos">
+                            <div class="input-grupo">
+                                <label>Quantidade de Peças Produzidas:</label>
+                                <input type="number" id="func-pecas" placeholder="10">
+                            </div>
+                            <div class="input-grupo">
+                                <label>Valor Pago por Peça (R$):</label>
+                                <input type="number" id="func-pago-por-peca" placeholder="25.00">
+                            </div>
+                        </div>
+                        <button id="btn-salvar-func" class="btn-acao-painel">Registrar Mão de Obra</button>
+                    </div>
+                    <div class="card-formulario">
+                        <h3>Ranking de Produtividade & Pagamentos</h3>
+                        <div class="mini-dash-equipe">
+                            <div>Total Mão de Obra: <strong id="dash-total-pago">R$ 0,00</strong></div>
+                            <div>Total Peças: <strong id="dash-total-pecas">0</strong></div>
+                        </div>
+                        <ul id="lista-ranking-produtividade" class="lista-customizada"></ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tela-engenharia" class="tela-painel">
+                <div class="painel-header">
+                    <h2>⚙️ Engenharia do Produto Final & Ficha Técnica</h2>
+                </div>
+                <div class="grid-inputs-dois">
+                    <div class="card-formulario">
+                        <h3>Estruturar Novo Produto Comercial</h3>
+                        <div class="input-grupo">
+                            <label>Nome Comercial do Produto:</label>
+                            <input type="text" id="prod-nome" placeholder="Ex: Bolsa Porta Celular Crochê">
+                        </div>
+                        <div class="grid-dois-campos">
+                            <div class="input-grupo">
+                                <label>Qtd Produzida para Estoque:</label>
+                                <input type="number" id="prod-qtd" placeholder="Deixe em branco ou digite...">
+                            </div>
+                            <div class="input-grupo">
+                                <label>Cores / Variações:</label>
+                                <input type="text" id="prod-cor" placeholder="Ex: Rami, Azul-marinho">
+                            </div>
+                        </div>
+                        <div class="grid-dois-campos">
+                            <div class="input-grupo">
+                                <label>Categoria:</label>
+                                <select id="prod-categoria">
+                                    <option value="Bolsas">Bolsas</option>
+                                    <option value="Acessórios">Acessórios</option>
+                                    <option value="Máscaras">Máscaras</option>
+                                </select>
+                            </div>
+                            <div class="input-grupo">
+                                <label>Link da Loja (Mercado Livre/Enjoei - Opcional):</label>
+                                <input type="url" id="prod-loja" placeholder="https://produto.mercadolivre...">
+                            </div>
+                        </div>
+
+                        <h4 class="sub-divisao">🧮 Rateio de Insumo por Consumo Unitário</h4>
+                        <div class="grid-dois-campos">
+                            <div class="input-grupo">
+                                <label>Selecionar Lote Origem:</label>
+                                <select id="prod-lote-selecionado"><option value="">-- Selecione o Lote --</option></select>
+                            </div>
+                            <div class="input-grupo">
+                                <label>Consumo de Linha por Peça (Metros):</label>
+                                <input type="number" id="prod-lote-metros-gasto" placeholder="Ex: 85">
+                            </div>
+                        </div>
+
+                        <h4 class="sub-divisao">💸 Mão de Obra Vinculada & Lucro</h4>
+                        <div class="grid-dois-campos">
+                            <div class="input-grupo">
+                                <label>Quem Confeccionou?</label>
+                                <select id="prod-func-selecionado"><option value="">-- Selecione o Produtor --</option></select>
+                            </div>
+                            <div class="input-grupo">
+                                <label>Lucro Desejado do Ateliê (%):</label>
+                                <input type="number" id="prod-lucro-empresa" value="30">
+                            </div>
+                        </div>
+
+                        <button id="btn-salvar-produto" class="btn-acao-painel" style="background:#0284c7;">Lançar Produto na Vitrine</button>
+                    </div>
+
+                    <div class="card-formulario calculo-box-dinamico">
+                        <h3>📊 Resumo de Precificação Estimada</h3>
+                        <div class="linha-calculo"><span>Custo de Material Unitário:</span> <strong id="view-custo-mat">R$ 0,00</strong></div>
+                        <div class="linha-calculo"><span>Custo de Mão de Obra Unitário:</span> <strong id="view-custo-mo">R$ 0,00</strong></div>
+                        <hr>
+                        <div class="linha-calculo total-final"><span>Preço de Venda Sugerido:</span> <strong id="view-preco-final">R$ 0,00</strong></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tela-consolidado" class="tela-painel">
+                <div class="painel-header">
+                    <h2>📊 Balanço Consolidado do Ateliê (2026)</h2>
+                </div>
+                
+                <div class="indicadores-financeiros-grid">
+                    <div class="card-metrica">
+                        <span>Faturamento Real (Vendas)</span>
+                        <h2 id="total-faturamento-real" style="color: #10b981;">R$ 0,00</h2>
+                    </div>
+                    <div class="card-metrica">
+                        <span>Custo Total de Insumos</span>
+                        <h2 id="total-custo-insumos" style="color: #f43f5e;">R$ 0,00</h2>
+                    </div>
+                    <div class="card-metrica">
+                        <span>Total Mão de Obra Paga</span>
+                        <h2 id="total-custo-mo-geral" style="color: #f59e0b;">R$ 0,00</h2>
+                    </div>
+                    <div class="card-metrica">
+                        <span>Lucro Líquido do Mês Ativo</span>
+                        <h2 id="total-lucro-liquido-mes">R$ 0,00</h2>
+                    </div>
+                </div>
+
+                <div class="card-metrica resumo-ano-caixa" style="margin-top: 20px; background: #f0fdf4; border: 1px solid #bbf7d0;">
+                    <span style="color:#166534; font-weight:bold;">📅 ACUMULADO ANUAL TOTAL DE LUCROS DO ANO (2026)</span>
+                    <h1 id="lucro-acumulado-ano" style="color: #15803d; margin: 5px 0 0 0;">R$ 0,00</h1>
+                    <small style="color: #166534;">Soma consolidada de todos os meses com fluxos de caixas ativos.</small>
+                </div>
+
+                <div class="card-formulario" style="margin-top: 25px;">
+                    <h3>📋 Histórico de Vendas Confirmadas (Mês Selecionado)</h3>
+                    <div style="overflow-x: auto;">
+                        <table class="tabela-custom">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Produto</th>
+                                    <th>Qtd</th>
+                                    <th>Total</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabela-historico-vendas">
+                                </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+<script src="script.js"></script>
+
 </body>
 </html>
